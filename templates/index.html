@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistente Q&A (Context-based)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+      .alert {
+        margin-bottom: 0 !important;
+      }
+    </style>
+</head>
+<body class="bg-dark">
+  <div class="container">
+    <div class="row vh-100 d-flex justify-content-center align-items-center">
+      <div class="col-8">
+        <h2 class="text-center text-white mb-3">Assistente Q&A (Context-Based)</h2>
+        <div class="card shadow m-3" style="height: 500px">
+          <div id="chatbox" class="card-body overflow-auto">
+              {% for c in chat %}
+                {% if loop.index %2 == 0%} {# is even #}
+                <div class="row justify-content-end my-4">
+                  <div class="col-10 d-flex justify-content-end">
+                    <div class="alert alert-primary" role="alert">
+                      {{ c }}
+                    </div>
+                    <img src="static\img\001-assistant.png" class="ms-3" alt="" width="50" height="58">
+                  </div>
+                </div>
+                {% else %}
+                    <div class="row justify-content-start my-4">
+                      <div class="col-10 d-flex justify-content-start">
+                        <img src="static\img\002-man.png" class="me-3" alt="" width="50" height="58">
+                        <div class="alert alert-secondary" role="alert">
+                          {{ c }}
+                        </div>
+                      </div>
+                    </div>
+                {% endif %}
+              {% endfor %}
+          </div>
+          <div class="card-footer">
+            <form action="/" method="post">
+              <div class="d-flex">
+                  <input class="form-control me-3 w-75" placeholder="Pergunte aqui.." id="query" name="query" type="text">
+                  <button class="btn btn-primary w-25 h-75" type="submit">Enviar</button>
+              </div>
+          </form>
+          </div>
+        </div>
+        <div class="row mx-3">
+          <div class="col-6 d-flex justify-content-start">
+            <small class="text-white">Este demo gera respostas com base no contexto de ficheiros locais</small>
+          </div>
+          <div class="col-6 d-flex justify-content-end">
+            <small class="text-white">v0.1</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+<script src="static\js\script.js"></script>
