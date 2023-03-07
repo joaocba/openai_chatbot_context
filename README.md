@@ -2,7 +2,7 @@
 
 #### Technology: OpenAi GPT AI models
 
-#### Description: Simple chatbot demo developed with Flask that features conversation with a virtual assistant. The context of answers is focused on a local indexation file strutured with Llamaindex (GPT-index) lib which converts raw data into a dataset (Json) a therefore the assistant will use the dataset to provide answers. 
+#### Description: Simple chatbot demo developed with Flask that features conversation with a virtual assistant. The context of answers are focused on a local indexation file strutured with Llamaindex (GPT-index) lib which converts raw data into a dataset (Json) a therefore the assistant will use the dataset to provide answers. 
 
 #### Place raw data on "content" folder
 
