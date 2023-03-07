@@ -9,7 +9,7 @@
 #### How to run (commands Windows terminal):
 - python3 -m venv venv
 - venv\Scripts\activate
-- pip install flask openai python-dotenv
+- pip install flask openai python-dotenv gpt_index langchain
 - flask run
 - Load http://localhost:5000 on browser
 

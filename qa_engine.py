@@ -4,7 +4,7 @@ import os
 
 
 # set OpenAi API key ( grab it from https://platform.openai.com/account/api-keys )
-os.environ["OPENAI_API_KEY"] = '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'
+os.environ["OPENAI_API_KEY"] = ''
 
 
 def construct_index(directory_path):
