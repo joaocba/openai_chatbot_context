@@ -1,40 +1,50 @@
 from flask import Flask, render_template, request
 from gpt_index import GPTSimpleVectorIndex
-from qa_engine import construct_index, ask_qa
+from qa_engine import construct_index, generate_response
 
+
+## context data config ##
+# add data files to \content folder, can be .html, .txt, .csv, etc
+content_fpath = 'content'
+
+# construct and save index - this consumes usage on API credit
+#index = construct_index(content_fpath) #uncomment to generate json
+
+# path for dataset file (after indexation)
+dataset_file = 'indices\index.json'
+## end context data config ##
+
+
+# array to store conversations
+conversation = ["You are a virtual assistant and you speak portuguese."]    # define initial role
 
 app = Flask(__name__)
 
-# add data files to \content folder, can be .html, .txt, etc
-content_fpath = 'content'
+# define app routes
+@app.route("/")
+def index():
+    return render_template("index.html")
 
-# construct and save GPT index (uncomment to index data) - this consumes usage on API credit
-#index = construct_index(content_fpath)
-
-# dataset file for context
-dataset_file = 'indices\index.json'
-
-
-conversations = []
-
-# views
-@app.route('/', methods=['GET', 'POST'])
-def home():
+@app.route("/get")
+def get_bot_response():
+    # load indexed data
     index = GPTSimpleVectorIndex.load_from_disk(dataset_file)
-    if request.method == 'GET':
-        return render_template('index.html')
-    if request.method == 'POST':
-        query = request.form['query']
-        response = ask_qa(query, index)
+    user_input = request.args.get("msg") + '\n'
+    if user_input:
+        conversation.append(f"{user_input}")
 
-        conversations.append(query)
-        conversations.append(response)
+        # get conversation history
+        prompt = "\n".join(conversation[-3:])
 
-        return render_template('index.html', chat = conversations)
+        # generate AI response based on indexed data
+        response = generate_response(prompt, index)
+
+        # add AI response to conversation
+        conversation.append(f"{response}")
+
+        return response
     else:
-        return render_template('index.html')
+        return "Sorry, I didn't understand that."
 
-
-# run
-if __name__ == '__app__':
+if __name__ == "__main__":
     app.run()
