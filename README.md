@@ -11,6 +11,10 @@ On this demo is used GPTSimpleVectorIndex to created a vector file from the loca
 
 LangChain is a framework built around LLMs. The core of the library is to “chain” together different components to create more advanced use cases around LLMs.
 
+## Screenshots
+
+![alt text](https://github.com/joaocba/openai_chatbot_context/blob/main/screenshots/main_app.png?raw=true)
+
 ### How to run (commands Windows terminal with Python 2.7):
 
 #### Part One: Prepare Environment
